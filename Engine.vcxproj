@@ -139,11 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\Engine.cpp" />
+    <ClCompile Include="source\DVS.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\TestStand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\DVS.h" />
     <ClInclude Include="source\Engine.h" />
     <ClInclude Include="source\TestStand.h" />
   </ItemGroup>

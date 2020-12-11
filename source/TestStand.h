@@ -1,13 +1,13 @@
 #ifndef TESTSTAND_H
 #define TESTSTAND_H
-#include "Engine.h"
+#include "DVS.h"
 #include <iostream>
 #include <fstream>
 #include <map>
 #include <string>
 
-enum typeEngine {
-	DVS1,
+enum typeEngine {	//Добавление названия для удобства передачи
+	DVS1,			//ID конфига в listEngine
 };
 
 class TestStand
@@ -19,7 +19,7 @@ class TestStand
 		void end();
 
 	protected:
-		Engine *dvs;
+		DVS *dvs;
 		std::map<int, std::string> listEngine;
 		int timer = 0;
 };

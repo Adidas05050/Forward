@@ -4,8 +4,8 @@ TestStand::TestStand(int configId) {
 	double temp;
 	std::cout << "Input ambient temp: ";
 	std::cin >> temp;
-	listEngine.insert(std::make_pair<int, std::string>(0, "configs/dvs1.txt")); //добавление конфиг файла
-	dvs = new Engine(temp, (*listEngine.find(configId)).second);
+	listEngine.insert(std::make_pair<int, std::string>(DVS1, "configs/dvs1.txt")); //добавление конфиг файла
+	dvs = new DVS(temp, (*listEngine.find(configId)).second);
 	dvs->parsing();
 }
 

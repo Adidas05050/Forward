@@ -1,9 +1,12 @@
-#include "Engine.h"
-#include <cmath>
-Engine::Engine(double temp, std::string filename) : tempAmbient(temp), tempEngine(temp), filename(filename) {
+#include "DVS.h"
+
+DVS::DVS(double temp, std::string fileName) {
+	tempAmbient = temp;
+	tempEngine = temp;
+	filename = fileName;
 }
 
-void Engine::parsing() {
+void DVS::parsing() {
 	std::ifstream file(filename);
 	std::string number, temp;
 	while (!file.eof()) {
@@ -35,7 +38,7 @@ void Engine::parsing() {
 				number.clear();
 			}
 		}
-		else if(temp == "V") {
+		else if (temp == "V") {
 			file >> temp;
 			temp.clear();
 			getline(file, temp);
@@ -82,29 +85,29 @@ void Engine::parsing() {
 	}
 }
 
-void Engine::speedCoolEngine() {
+void DVS::speedCoolEngine() {
 	speedCooling = C * (tempAmbient - tempEngine);
 	tempEngine += speedCooling;
 }
 
-int Engine::isOverHeat() {
-	if(fabs(V[V.size()-1] - currentV) < 1e-6)
+int DVS::isOverHeat() {
+	if (fabs(V[V.size() - 1] - currentV) < 1e-6)
 		return -1; // двигатель не перегреется при таких условиях
 	return (tempEngine > T);
 }
 
-int Engine::speedHeatEngine(int i) {
-	if(speedCrankshaft < V[i+1])
+int DVS::speedHeatEngine(int i) {
+	if (speedCrankshaft < V[i + 1])
 		currentV = speedCrankshaft;
 	else
-		currentV = V[i+1];
+		currentV = V[i + 1];
 
-	currentM = ((M[i+1] - M[i]) / V[i+1]) * currentV + M[i];
+	currentM = ((M[i + 1] - M[i]) / V[i + 1]) * currentV + M[i];
 	speedHeat = currentM * Hm + (currentV * currentV) * Hv;
 	speedCrankshaft += currentM / I;
 
 	tempEngine += speedHeat;
-	if(currentV >= V[i+1] and i < M.size() - 2)
+	if (currentV >= V[i + 1] and i < M.size() - 2)
 		i++;
 	return i;
 }
